@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>tia-mcp-v16</AssemblyName>
+    <RootNamespace>TiaMcpV16</RootNamespace>
+    <!-- Dossier de l'API Openness V16. Surcharge possible : dotnet build -p:TiaApiDir="..." -->
+    <TiaApiDir Condition="'$(TiaApiDir)'==''">C:\Program Files\Siemens\Automation\Portal V16\PublicAPI\V16</TiaApiDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Private=false : la DLL Siemens n'est PAS copiée, elle est chargée depuis l'installation TIA -->
+    <Reference Include="Siemens.Engineering">
+      <HintPath>$(TiaApiDir)\Siemens.Engineering.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
